@@ -111,6 +111,7 @@ class PTOCalculator {
     static MAX_PTO = 120; // hours
     static HOURS_ACCRUED = 9;
     static DEFAULT_TIME_OFF = 8;
+    static STARTING_HOURS = 0;
 
     static selectDate(index, event, button) {
         // console.log(index, event, button);
@@ -135,6 +136,30 @@ class PTOCalculator {
 
         // Redraw backgrounds
         month.calcDisplayPTO(dayIndex);
+    }
+
+    static updateSetting(item, value) {
+        let number = parseFloat(value);
+
+        if (isNaN(number)) {
+            // String
+            switch (item) {
+                case "payroll": this.PAYROLL = value; break;
+            } 
+            WINDOW.recalcPTO();
+            WINDOW.calandar.getCurrentMonth().select();
+        } else {
+            // Number
+            switch (item) {
+                case "maxpto": this.MAX_PTO = number;
+                    WINDOW.calandar.getCurrentMonth().calcDisplayPTO();
+                    break;
+                case "accrued": this.HOURS_ACCRUED = number; break;
+                case "timeoff": this.DEFAULT_TIME_OFF = number; break;
+                case "initpto": this.STARTING_HOURS = number; break;
+            }
+            WINDOW.recalcPTO();
+        }
     }
 
     constructor() {
@@ -215,6 +240,7 @@ class Month extends PTOCalculator {
     }
 
     select() {
+
         // Enable months
         for (let i = 0; i < 37; i++) {
             let elem = Elements.DAY_ITEMS[i];
@@ -270,7 +296,7 @@ class Day extends PTOCalculator {
         this.imgsrc = "";
         this.elem = null;
         this.current = false;
-        this.lastDisplayPTO = null;
+        this.lastDisplayPTO = {};
 
         // PTO
         this.timeOff = 0;
@@ -295,10 +321,16 @@ class Day extends PTOCalculator {
         function date() {
             let str = THIS.day + 1;
             let date = THIS.elem.getElementsByTagName("div")[0];
-
-            if (THIS.current) date.classList.add("active");
-            else date.classList.remove("active");
             date.innerHTML = str;
+
+            // Active style
+            if (THIS.current) {
+                THIS.elem.classList.add("active");
+                date.classList.add("active");
+            } else {
+                THIS.elem.classList.remove("active");
+                date.classList.remove("active");
+            }
             
             // Update outline attributes
             THIS.updateAttributes();
@@ -311,6 +343,11 @@ class Day extends PTOCalculator {
             if (THIS.elem == null) return;
             let header = THIS.elem.getElementsByTagName("h2")[0];
             header.innerHTML = THIS.endPTO;
+            if (THIS.endPTO >= PTOCalculator.MAX_PTO) {
+                header.style.color = "#00000033";
+            } else {
+                header.style.color = "#ffffff22";
+            }
         }
 
         return { date, pto };
@@ -368,8 +405,13 @@ class Day extends PTOCalculator {
             return;
 
         // Update image
-        if (this.endPTO != this.lastDisplayPTO) {
-            this.lastDisplayPTO = this.endPTO;
+        if (this.endPTO != this.lastDisplayPTO.pto ||
+            PTOCalculator.MAX_PTO != this.lastDisplayPTO.max) {
+            
+            // Variables
+            this.lastDisplayPTO.pto = this.endPTO;
+            this.lastDisplayPTO.max = PTOCalculator.MAX_PTO;
+
             WINDOW.pto.updateDay(this);
             this.updateImage();
             return await sleep(20);
@@ -496,7 +538,24 @@ class Window {
     }
 
     initEvents() {
-        
+        const maxpto = document.getElementById("max-pto");
+        const initpto = document.getElementById("init-hours");
+        const accrued = document.getElementById("hours-accrued");
+        const timeoff = document.getElementById("hours-off");
+        const payroll = document.getElementById("payroll-type");
+
+        // Default values
+        maxpto.value = 120;
+        initpto.value = 0;
+        accrued.value = 9;
+        timeoff.value = 8;
+        payroll.value = "semi-monthly";
+
+        maxpto.addEventListener("change", () => PTOCalculator.updateSetting("maxpto", maxpto.value));
+        payroll.addEventListener("change", () => PTOCalculator.updateSetting("payroll", payroll.value));
+        initpto.addEventListener("change", () => PTOCalculator.updateSetting("initpto", initpto.value));
+        accrued.addEventListener("change", () => PTOCalculator.updateSetting("accrued", accrued.value));
+        timeoff.addEventListener("change", () => PTOCalculator.updateSetting("timeoff", timeoff.value));
     }
 
     reAddMonthTitle(oldMonth = "Year") {
@@ -525,7 +584,7 @@ class Window {
         years.sort();
 
         // Calculate all PTO
-        let pto = 0;
+        let pto = PTOCalculator.STARTING_HOURS;
         for (let i of years) {
             pto = this.calandar.years[i].calcPTO(pto);
         }
@@ -541,8 +600,9 @@ class DisplayPTO {
         this.canvas.width = 200;
         this.canvas.height = 200;
 
-        this.goodColor = hexToRgb("#1cffd255");
-        this.badColor = hexToRgb("#bc1a4b66");
+        this.goodColor = hexToRgb("#084f4155");
+        this.badColor = hexToRgb("#1cffd255");
+        // this.badColor = hexToRgb("#bc1a4b66");
 
         // Create gradient fill
         this.fillStyle = this.context.createLinearGradient(0, 0, 0, this.canvas.height);

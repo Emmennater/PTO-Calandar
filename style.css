@@ -14,20 +14,51 @@ head, body {
     font-weight: normal;
 }
 
-.calandar-month {
-    /* Shape */
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 20px;
-    max-width: 800px;
-    height: 600px;
-    padding: 10px;
-    
+.window {
     /* Looks */
     border: solid 4px #222222;
     background-image: linear-gradient(#3f3f3f, #333333);
     box-shadow: 0px 5px 8px 8px #00000033;
+}
+
+.calandar-month {
+    /* Grid */
+    grid-column: 1;
+
+    /* Shape */
+    display: inline-block;
+    margin: 0;
+    /* max-width: 800px; */
+    min-width: 500px;
+    height: 600px;
+    padding: 10px;
+}
+
+.settings {
+    /* Grid */
+    grid-column: 2;
+
+    /* Shape */
+    display: inline-block;
+    height: 200px;
+    margin-right: 10px;
+    
+    min-width: 220px;
+    overflow: hidden;
+}
+
+.container {
+    /* Shape */
+    display: grid;
+    grid-template-columns: 75% 25%;
+    min-width: 70%;
+    max-width: 800px;
+    gap: 10px;
+    padding: 10px;
+    /* background-color: #ff000022; */
+
+    /* Center div */
+    margin: auto;
 }
 
 #month-title {
@@ -138,6 +169,19 @@ head, body {
     text-shadow: 0px 0px 7px #ffffff44;
 }
 
+.title {
+    /* Shape */
+    padding: 4px;
+    margin-bottom: 4px;
+    
+    /* Looks */
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    color: #bbbbbb;
+    text-shadow: none;
+    box-shadow: 0 2px 4px 2px #00000055;
+}
+
 .arrow {
     /* Shape */
     font-size: 30px;
@@ -182,7 +226,7 @@ h2 {
     /* Looks */
     font-family: var(--font2);
     font-weight: 100;
-    color: #ffffff22;
+    /* color: set in code (class Day) */
 
 }
 
@@ -194,6 +238,44 @@ table {
 
 table.days {
     height: 80%;
+}
+
+input, select, option {
+    /* Shape */
+    width: calc(100% - 20px);
+    height: 18px;
+    margin: 4px;
+
+    /* Looks */
+    color: #bbbbbb;
+    font-size: 16px;
+    font-family: monospace;
+    background-image: linear-gradient(#333333, #3c3c3c);
+}
+
+select, option {
+    height: 24px;
+    font-size: 14px;
+}
+
+option {
+    background-color: #3c3c3c;
+}
+
+.label {
+    /* Shape */
+    display: inline-block;
+    margin: 4px;
+    padding-left: 4px;
+    padding-right: 4px;
+
+    /* Looks */
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    color: #bbbbbb;
+    /* background-image: linear-gradient(#555555, #444444);
+    border: solid 2px #333333; */
+
 }
 
 /* CALANDAR */
@@ -240,8 +322,13 @@ ul {
     /* padding-left: 20px;
     padding-right: 20px; */
     background: #1abc9c99;
-    color: #bc1a4b;
+    /* color: #bc1a4b; */
     color: white !important
+}
+
+.days th.active {
+    outline-color: #1abc9c;
+    box-shadow: inset 0px 0px 6px 6px #1abc9c33;
 }
 
 .days th:hover {
@@ -264,8 +351,10 @@ ul {
 }
 
 .days th.timeoff {
-    outline: solid 2px #bcb11abb;
-    box-shadow: inset 0px 0px 5px 5px #bcb11a22;
+    /* outline: solid 2px #bcb11abb; */
+    /* box-shadow: inset 0px 0px 5px 5px #bcb11a22; */
+    outline: solid 2px #e6f141bb;
+    box-shadow: inset 0px 0px 5px 5px #e6f14122;
 }
 
 div.date {
@@ -284,4 +373,17 @@ div.date {
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
+}
+
+/* Tags */
+
+hbox {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+/* Events */
+
+input:focus {
+    outline: none;
 }

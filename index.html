@@ -16,26 +16,58 @@
     </head>
     <body>
         
-        <div class="calandar-month">
-            <!-- Month / Year -->
-            <div class="heading" id="month-div">
-                <button id="month-left" class="arrow" onclick="WINDOW.calandar.changeMonth(-1)">◄</button>
-                <span id="month-title">Year</span>
-                <button id="month-right" class="arrow" onclick="WINDOW.calandar.changeMonth(+1)">►</button>
+        <div class="container">
+
+            <!-- Calandar -->
+            <div class="window calandar-month">
+                <!-- Month / Year -->
+                <div class="heading" id="month-div">
+                    <button id="month-left" class="arrow" onclick="WINDOW.calandar.changeMonth(-1)">◄</button>
+                    <span id="month-title">Year</span>
+                    <button id="month-right" class="arrow" onclick="WINDOW.calandar.changeMonth(+1)">►</button>
+                </div>
+
+                <table class="month">
+                    <tr class="weekdays">
+                        <th>Mo</th>
+                        <th>Tu</th>
+                        <th>We</th>
+                        <th>Th</th>
+                        <th>Fr</th>
+                        <th>Sa</th>
+                        <th>Su</th>
+                    </tr>
+                </table>
+                <table id="days" class="days"></table>
             </div>
 
-            <table class="month">
-                <tr class="weekdays">
-                    <th>Mo</th>
-                    <th>Tu</th>
-                    <th>We</th>
-                    <th>Th</th>
-                    <th>Fr</th>
-                    <th>Sa</th>
-                    <th>Su</th>
-                </tr>
-            </table>
-            <table id="days" class="days"></table>
+            <!-- Settings -->
+            <div class="window settings">
+                <div class="heading title">Settings</div>
+                <hbox>
+                    <p class="label">Max PTO</p>
+                    <input id="max-pto">
+                </hbox>
+                <hbox>
+                    <p class="label">Starting Hours</p>
+                    <input id="init-hours">
+                </hbox>
+                <hbox>
+                    <p class="label">Time Accrued</p>
+                    <input id="hours-accrued">
+                </hbox>
+                <hbox>
+                    <p class="label">Time off</p>
+                    <input id="hours-off">
+                </hbox>
+                <hbox>
+                    <p class="label">Payroll</p>
+                    <select id="payroll-type">
+                        <option value="bi-weekly">Bi-Weekly</option>
+                        <option value="semi-monthly">Semi-Monthly</option>
+                    </select>
+                </hbox>
+            </div>
         </div>
 
     </body>

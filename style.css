@@ -338,14 +338,20 @@ ul {
 
     /* Looks */
     /* outline: solid 2px #1abc9c; */
-    outline: solid 2px #cccccc;
-    /* box-shadow: 0px 0px 6px 6px #1abc9c22; */
-    box-shadow: 0px 0px 6px 6px #ffffff22;
+    /* outline: solid 2px #cccccc; */
+    /* outline: solid 1px #888888; */
+    /* box-shadow: inset 0px 0px 6px 6px #1abc9c22; */
+    /* box-shadow: 0px 0px 6px 6px #ffffff22; */
+    /* box-shadow: 0px 0px 12px 12px #00000022; */
+    /* box-shadow: inset 0px 0px 6px 6px #ffffff22; */
+    box-shadow: inset 0px 0px 5px 5px #22222233,
+                0px 6px 12px 12px #22222233;
 }
 
 .days th.payday {
     outline: solid 2px #1abc9c;
-    box-shadow: inset 0px 0px 6px 6px #1abc9c22;
+    box-shadow: inset 0px 0px 6px 6px #1abc9c22,
+        0px 6px 12px 12px #22222233, 0px 6px 12px 12px #1abc9c22;
     /* outline-color: #bcb11abb;
     box-shadow: inset 0px 0px 5px 5px #bcb11a22; */
 }
@@ -354,7 +360,8 @@ ul {
     /* outline: solid 2px #bcb11abb; */
     /* box-shadow: inset 0px 0px 5px 5px #bcb11a22; */
     outline: solid 2px #e6f141bb;
-    box-shadow: inset 0px 0px 5px 5px #e6f14122;
+    box-shadow: inset 0px 0px 5px 5px #e6f14122,
+        0px 6px 12px 12px #22222233, 0px 6px 12px 12px #e6f14122;
 }
 
 div.date {

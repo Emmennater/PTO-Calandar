@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        
+        <title>PTO Management</title>
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+        
+        <script src="src/helper.js" defer></script>
+        <script src="src/setup.js" defer></script>
+    
+    </head>
+    <body>
+        
+        <div class="calandar-month">
+            <!-- Month / Year -->
+            <div class="heading" id="month-div">
+                <button id="month-left" class="arrow" onclick="WINDOW.calandar.changeMonth(-1)">◄</button>
+                <span id="month-title">Year</span>
+                <button id="month-right" class="arrow" onclick="WINDOW.calandar.changeMonth(+1)">►</button>
+            </div>
+
+            <table class="month">
+                <tr class="weekdays">
+                    <th>Mo</th>
+                    <th>Tu</th>
+                    <th>We</th>
+                    <th>Th</th>
+                    <th>Fr</th>
+                    <th>Sa</th>
+                    <th>Su</th>
+                </tr>
+            </table>
+            <table id="days" class="days"></table>
+        </div>
+
+    </body>
+</html>

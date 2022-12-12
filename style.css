@@ -1,0 +1,287 @@
+
+:root {
+    --bgimg: linear-gradient(#363636, #2e2e2e);
+    --font: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    --font2: 'Consolas';
+    --fontcol: rgb(221, 221, 221);
+}
+
+head, body {
+    margin: 0;
+    background-image: linear-gradient(rgb(29, 29, 29), rgb(56, 56, 56));
+    background-attachment: fixed;
+    font-family: var(--font2);
+    font-weight: normal;
+}
+
+.calandar-month {
+    /* Shape */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    max-width: 800px;
+    height: 600px;
+    padding: 10px;
+    
+    /* Looks */
+    border: solid 4px #222222;
+    background-image: linear-gradient(#3f3f3f, #333333);
+    box-shadow: 0px 5px 8px 8px #00000033;
+}
+
+#month-title {
+    /* Position and Scaling */
+    font-size: 50px;
+    margin: 0px;
+    padding: 0px;
+    width: 450px;
+
+    /* Looks */
+    color: var(--fontcol);
+
+}
+
+#month-title.moveup {
+    -webkit-animation: slidein 0.4s;
+    animation: slidein 0.4s;
+}
+
+#month-title.movedown {
+    -webkit-animation: slideout 0.4s;
+    animation: slideout 0.4s;
+}
+
+#month-title .active {
+    color: #1abc9c;
+    text-shadow: 0px 0px 7px #1abc9c44;
+}
+
+.arrow.flash {
+    -webkit-animation: flash 0.2s;
+    animation: flash 0.2s;
+}
+
+@keyframes slidein {
+
+    0% {
+        transform: translateY(0%);
+        opacity: 100%;
+    }
+
+    50% {
+        transform: translateY(-50%);
+        opacity: 0%;
+    }
+
+    50.001% {
+        transform: translateY(50%);
+        opacity: 0%;
+    }
+
+    100% {
+        transform: translateY(0%);
+        opacity: 100%;
+    }
+}
+
+@keyframes slideout {
+
+    0% {
+        transform: translateY(0%);
+        opacity: 100%;
+    }
+
+    50% {
+        transform: translateY(50%);
+        opacity: 0%;
+    }
+
+    50.001% {
+        transform: translateY(-50%);
+        opacity: 0%;
+    }
+
+    100% {
+        transform: translateY(0%);
+        opacity: 100%;
+    }
+}
+
+@keyframes flash {
+
+    0% {
+
+    }
+
+    25% {
+        scale: 0.9;
+    }
+
+    50% {
+        scale: 0.9;
+    }
+
+    100% {
+        
+    }
+}
+
+.heading {
+    display:flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+
+    /* Looks */
+    background-image: var(--bgimg);
+    text-shadow: 0px 0px 7px #ffffff44;
+}
+
+.arrow {
+    /* Shape */
+    font-size: 30px;
+    
+    /* Looks */
+    border: none;
+    background-color: transparent;
+    color: transparent;
+    -webkit-text-stroke: 2px white;
+    text-shadow: 0px 0px 20px #ffffffaa;
+    
+}
+
+.arrow:hover {
+    text-shadow: 0px 0px 20px #ffffff77;
+}
+
+button {
+    cursor: pointer;
+
+    transition: ease-in-out 0.2s;
+}
+
+button:hover {
+    scale: 1.2;
+}
+
+span {
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    /* Shape */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin: auto;
+    margin-top: 12px;
+    font-size: 30px;
+
+    /* Looks */
+    font-family: var(--font2);
+    font-weight: 100;
+    color: #ffffff22;
+
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+    border-spacing: 8px;
+}
+
+table.days {
+    height: 80%;
+}
+
+/* CALANDAR */
+
+ul {
+    list-style-type: none;
+}
+
+.month {
+    background: #00000022;
+}
+
+.weekdays th {
+    /* Shape */
+    font-size: 30px;
+
+    /* Looks */
+    color: #666;
+    background-color: #00000011;
+}
+
+.days th {
+    /* Shape */
+    font-size:12px;
+    vertical-align: top;
+    padding: 0;
+    z-index: 2;
+
+    /* Looks */
+    color: #777;
+    background-color: #00000022;
+    background-size: 100% 100%;
+    outline: solid 1px #555555; /*#053a2e*/
+    box-shadow: inset 0px 0px 5px 5px #22222233,
+                0px 6px 8px 8px #22222255;
+
+    /* Actions */
+    cursor: pointer;
+    transition: transform 0.2s, outline 0.2s, box-shadow 0.2s;
+}
+
+.days th .active {
+    padding: 2px;
+    /* padding-left: 20px;
+    padding-right: 20px; */
+    background: #1abc9c99;
+    color: #bc1a4b;
+    color: white !important
+}
+
+.days th:hover {
+    /* Shape */
+    z-index: 10;
+    transform: scale(1.1);
+
+    /* Looks */
+    /* outline: solid 2px #1abc9c; */
+    outline: solid 2px #cccccc;
+    /* box-shadow: 0px 0px 6px 6px #1abc9c22; */
+    box-shadow: 0px 0px 6px 6px #ffffff22;
+}
+
+.days th.payday {
+    outline: solid 2px #1abc9c;
+    box-shadow: inset 0px 0px 6px 6px #1abc9c22;
+    /* outline-color: #bcb11abb;
+    box-shadow: inset 0px 0px 5px 5px #bcb11a22; */
+}
+
+.days th.timeoff {
+    outline: solid 2px #bcb11abb;
+    box-shadow: inset 0px 0px 5px 5px #bcb11a22;
+}
+
+div.date {
+    /* Shape */
+    margin: 0px;
+    /* margin-top: 0px; */
+    /* padding: 1px; */
+
+    /* Looks */
+    background-color: #00000033;
+}
+
+/* Classes */
+
+.no_select, .arrow, .weekdays, .days {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
